@@ -9,10 +9,6 @@
     "lint": "next lint"
   },
   "packageManager": "npm@10.9.2",
-  "overrides": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.1",
@@ -29,8 +25,8 @@
     "next": "^15.2.0-canary.33",
     "next-auth": "^5.0.0-beta.19",
     "next-sanity": "^9.8.47",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "19.0.0-rc-2d16326d-20240930",
+    "react-dom": "19.0.0-rc-2d16326d-20240930",
     "sanity": "^3.71.2",
     "sanity-plugin-markdown": "^5.0.0",
     "server-only": "^0.0.1",
