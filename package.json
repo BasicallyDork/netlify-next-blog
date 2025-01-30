@@ -52,6 +52,9 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
+  "engines": {
+  "node": "22.x"
+},
   "jest": {
     "testEnvironment": "jsdom"
   }
