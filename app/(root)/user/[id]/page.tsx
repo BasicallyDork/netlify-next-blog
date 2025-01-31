@@ -10,7 +10,7 @@ import { AUTHOR_BY_ID_QUERY } from "@/sanity/lib/queries";
 import UserBlogs from "@/components/UserBlogs";
 import { BlogCardSkeleton } from "@/components/BlogCard";
 
-export const experimental_ppr = true;
+// export const experimental_ppr = true;
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
