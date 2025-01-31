@@ -7,6 +7,7 @@ import { AUTHOR_BY_GITHUB_ID_QUERY } from "@/sanity/lib/queries";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [GitHub],
+  trustHost: true,
   callbacks: {
     async signIn({ user, account, profile }) {
       // Check if the user exists in Sanity
