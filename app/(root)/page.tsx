@@ -1,4 +1,4 @@
-// import { auth } from "@/auth";
+
 import BlogCard, { BlogTypeCard } from "@/components/BlogCard";
 import SearchForm from "@/components/SearchForm";
 import { BLOGS_QUERY } from "@/sanity/lib/queries";

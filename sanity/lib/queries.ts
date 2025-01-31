@@ -103,6 +103,7 @@ export const PLAYLIST_BY_SLUG_QUERY =
 
 export const COMMENT_BY_BLOG_QUERY =
   defineQuery(`*[_type == "comment" && blog._ref == $id] | order(_createdAt desc) {
+  _id,
   comment,
   createdAt,
   userID-> {

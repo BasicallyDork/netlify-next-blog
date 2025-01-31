@@ -2,7 +2,6 @@
 import { z } from "zod";
 import { Send } from "lucide-react";
 import { useState, useActionState } from "react";
-
 import { createComment } from "@/lib/action";
 import { commentSchema } from "@/lib/validation";
 import { useToast } from "@/hooks/use-toast";
@@ -26,10 +25,8 @@ const CommentForm = ({ blogId }: { blogId: string }) => {
         comment: formData.get("comment") as string,
       };
 
-      // Validate form values
       await commentSchema.parseAsync(formValues);
 
-      // Create the comment and handle the result
       const result = await createComment(prevState, formData, content, blogId);
 
       if (result.status === "SUCCESS") {

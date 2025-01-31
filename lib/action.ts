@@ -2,7 +2,6 @@
 
 import { auth } from "@/auth";
 import slugify from "slugify";
-
 import { writeClient } from "@/sanity/lib/write-client";
 import { parseServerActionResponse } from "@/lib/utils";
 
@@ -70,20 +69,6 @@ export const createComment = async (state: any, form: FormData, content: string,
         _type: "reference",
         _ref: session?.id, // Reference the user who created the comment
       },
-      
-      // _id:drafts.cc97cb78-ab98-43b8-9a00-d4cc0ba4fd40
-      //   _type:comment
-      //   _createdAt:2025-01-27T13:50:57.998Z
-      //   blog:{…} 2 properties
-      //   _type:reference
-      //   _ref:zBY7Bgc8YY7JKuhWi0imW0
-      //   userID:{…} 2 properties
-      //   _type:reference
-      //   _ref:l44alCYb09vxjF9SxRHs98
-      //   comment:hello
-      //   _rev:158dea76-621e-42c1-bda5-e49e3a694ab0
-      //   _updatedAt:2025-01-27T13:51:04.121Z
-
     };
 
     const result = await writeClient.create(newComment);
@@ -103,3 +88,32 @@ export const createComment = async (state: any, form: FormData, content: string,
   }
 };
 
+export const deleteComment = async (commentId: string) => {
+  try {
+
+    const session = await auth();
+    if (!session) throw new Error('Unauthorized - Please log in');
+    console.log("session", session);
+
+    const comment = await writeClient.getDocument(commentId);
+    
+
+    if (!comment) throw new Error('Comment not found');
+    if (comment.userID._id !== session.user.id) {
+      throw new Error('Unauthorized - You do not own this comment');
+    }
+
+
+    await writeClient.delete(commentId);
+    
+
+    return { success: true, message: 'Comment deleted successfully' };
+  } catch (error) {
+
+    console.error('Delete failed:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to delete comment'
+    };
+  }
+};

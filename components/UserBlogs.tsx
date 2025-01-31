@@ -1,6 +1,5 @@
 import { client } from "@/sanity/lib/client";
 import { BLOGS_BY_AUTHOR_QUERY } from "@/sanity/lib/queries";
-
 import BlogCard, { BlogTypeCard } from "@/components/BlogCard";
 
 const UserBlogs = async ({ id }: { id: string }) => {

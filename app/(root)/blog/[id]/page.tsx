@@ -7,19 +7,17 @@ import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-
 import markdownit from "markdown-it";
-// import { Skeleton } from "@/components/ui/skeleton";
-// import View from "@/components/View";
-
 import { auth } from "@/auth";
 import CommentForm from "@/components/CommentBox";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { Trash } from "lucide-react";
+import { DeleteButton } from "@/components/DeleteButton";
+import { deleteComment } from "@/lib/action";
 
 const md = markdownit();
 
-// export const experimental_ppr = true;
+
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
@@ -32,7 +30,6 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!post) return notFound();
 
   const parsedContent = md.render(post?.content || "");
-
   return (
     <>
       <section className="pink_container !min-h-[230px]">
@@ -96,12 +93,12 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <div className="blog-form">
       <h3 className="blog-form_label">Comments</h3>
       <ul>
-        {comment.map((comment: { userID: { name: string, _id: string }, comment: string, createdAt: string }, index: number) => (
+        {comment.map((comment: { userID: { name: string, _id: string }, _id: string, comment: string, createdAt: string }, index: number) => (
           <li className="mt-2 bg-[#762bee24] p-4 rounded-xl" key={index}>
             <div><strong>{comment.userID.name}</strong>: 
             <div className="flex-between gap-2">
-            <span className="max-sm:hidden">{comment.comment}</span>
-             {session.id == comment.userID._id ? <Trash className="size-6 text-red-500 hover:cursor-pointer" /> : ''}</div></div>
+            <span className="">{comment.comment}</span>
+             {session.id == comment.userID._id ? <DeleteButton commentId={comment._id} /> : ''}</div></div>
             <small>{formatDate(comment.createdAt)}</small>
           </li>
         ))}

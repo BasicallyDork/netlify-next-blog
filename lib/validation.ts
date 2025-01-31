@@ -29,5 +29,5 @@ export const commentSchema = z.object({
   comment: z
     .string()
     .min(5, "Comment should be at least 5 characters")
-    .max(30, "Comment is too long. Max 30 characters at most"),
+    .max(100, "Comment is too long. Max 100 characters at most"),
 });

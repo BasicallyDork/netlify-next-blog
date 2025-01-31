@@ -1,16 +1,13 @@
 import Image from "next/image";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-
 import { auth } from "@/auth";
-
 import { client } from "@/sanity/lib/client";
 import { AUTHOR_BY_ID_QUERY } from "@/sanity/lib/queries";
-
 import UserBlogs from "@/components/UserBlogs";
 import { BlogCardSkeleton } from "@/components/BlogCard";
 
-// export const experimental_ppr = true;
+
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;

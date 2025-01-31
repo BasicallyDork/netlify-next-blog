@@ -36,10 +36,9 @@ const BlogForm = () => {
         content,
       };
 
-      // Validate form values
+
       await formSchema.parseAsync(formValues);
 
-      // Create the idea and handle the result
       const result = await createIdea(prevState, formData, content);
 
       if (result.status === "SUCCESS") {
