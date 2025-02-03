@@ -105,7 +105,7 @@ export const COMMENT_BY_BLOG_QUERY =
   defineQuery(`*[_type == "comment" && blog._ref == $id] | order(_createdAt desc) {
   _id,
   comment,
-  createdAt,
+  _createdAt,
   userID-> {
     name,
     email,

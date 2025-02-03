@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React from 'react'
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { EyeIcon } from 'lucide-react';
 import { Author, Blog } from '@/sanity/types';
 import { Skeleton } from './ui/skeleton';
 
@@ -11,7 +10,6 @@ export type BlogTypeCard = Omit<Blog, 'author'> & { author?: Author};
 const BlogCard = ({blogs}:{blogs: BlogTypeCard}) => {
     const {
       _createdAt,
-      views,
       author,
       title,
       category,

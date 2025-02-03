@@ -11,9 +11,7 @@ import markdownit from "markdown-it";
 import { auth } from "@/auth";
 import CommentForm from "@/components/CommentBox";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import { Trash } from "lucide-react";
 import { DeleteButton } from "@/components/DeleteButton";
-import { deleteComment } from "@/lib/action";
 
 const md = markdownit();
 
@@ -28,7 +26,6 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { data: comment } = await sanityFetch({ query: COMMENT_BY_BLOG_QUERY, params: { id } });
 
   if (!post) return notFound();
-
   const parsedContent = md.render(post?.content || "");
   return (
     <>
@@ -93,13 +90,13 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <div className="blog-form">
       <h3 className="blog-form_label">Comments</h3>
       <ul>
-        {comment.map((comment: { userID: { name: string, _id: string }, _id: string, comment: string, createdAt: string }, index: number) => (
+        {comment.map((comment: { userID: { name: string, _id: string }, _id: string, comment: string, _createdAt: string }, index: number) => (
           <li className="mt-2 bg-[#762bee24] p-4 rounded-xl" key={index}>
             <div><strong>{comment.userID.name}</strong>: 
             <div className="flex-between gap-2">
             <span className="">{comment.comment}</span>
              {session.id == comment.userID._id ? <DeleteButton commentId={comment._id} /> : ''}</div></div>
-            <small>{formatDate(comment.createdAt)}</small>
+            <small>{formatDate(comment._createdAt)}</small>
           </li>
         ))}
       </ul>
